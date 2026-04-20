@@ -23,8 +23,9 @@ package madmin
 
 // Table maintenance type constants
 const (
-	MaintenanceTypeIcebergSnapshotManagement = "icebergSnapshotManagement"
-	MaintenanceTypeIcebergCompaction         = "icebergCompaction"
+	MaintenanceTypeIcebergSnapshotManagement      = "icebergSnapshotManagement"
+	MaintenanceTypeIcebergCompaction              = "icebergCompaction"
+	MaintenanceTypeIcebergUnreferencedFileRemoval = "icebergUnreferencedFileRemoval"
 )
 
 // MaintenanceStatus represents the status of a table maintenance configuration.
@@ -53,11 +54,20 @@ type IcebergCompactionSettings struct {
 	TargetFileSizeMB *int `json:"targetFileSizeMB,omitempty"`
 }
 
+// IcebergUnreferencedFileRemovalSettings contains settings for Iceberg unreferenced file removal.
+// Files are eligible to be marked noncurrent when their age (anchored to creation time) exceeds
+// UnreferencedDays. Once noncurrent, files are permanently deleted after NoncurrentDays.
+type IcebergUnreferencedFileRemovalSettings struct {
+	UnreferencedDays *int `json:"unreferencedDays,omitempty"`
+	NoncurrentDays   *int `json:"noncurrentDays,omitempty"`
+}
+
 // TableMaintenanceSettings is a union type containing maintenance settings.
 // Only one of the fields should be set at a time based on the maintenance type.
 type TableMaintenanceSettings struct {
-	IcebergSnapshotManagement *IcebergSnapshotManagementSettings `json:"icebergSnapshotManagement,omitempty"`
-	IcebergCompaction         *IcebergCompactionSettings         `json:"icebergCompaction,omitempty"`
+	IcebergSnapshotManagement      *IcebergSnapshotManagementSettings      `json:"icebergSnapshotManagement,omitempty"`
+	IcebergCompaction              *IcebergCompactionSettings              `json:"icebergCompaction,omitempty"`
+	IcebergUnreferencedFileRemoval *IcebergUnreferencedFileRemovalSettings `json:"icebergUnreferencedFileRemoval,omitempty"`
 }
 
 // TableMaintenanceConfigurationValue represents a maintenance configuration with status.

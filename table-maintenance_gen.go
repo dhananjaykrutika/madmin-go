@@ -952,6 +952,213 @@ func (z *IcebergSnapshotManagementSettings) Msgsize() (s int) {
 }
 
 // DecodeMsg implements msgp.Decodable
+func (z *IcebergUnreferencedFileRemovalSettings) DecodeMsg(dc *msgp.Reader) (err error) {
+	var field []byte
+	_ = field
+	var zb0001 uint32
+	zb0001, err = dc.ReadMapHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	for zb0001 > 0 {
+		zb0001--
+		field, err = dc.ReadMapKeyPtr()
+		if err != nil {
+			err = msgp.WrapError(err)
+			return
+		}
+		switch msgp.UnsafeString(field) {
+		case "UnreferencedDays":
+			if dc.IsNil() {
+				err = dc.ReadNil()
+				if err != nil {
+					err = msgp.WrapError(err, "UnreferencedDays")
+					return
+				}
+				z.UnreferencedDays = nil
+			} else {
+				if z.UnreferencedDays == nil {
+					z.UnreferencedDays = new(int)
+				}
+				*z.UnreferencedDays, err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "UnreferencedDays")
+					return
+				}
+			}
+		case "NoncurrentDays":
+			if dc.IsNil() {
+				err = dc.ReadNil()
+				if err != nil {
+					err = msgp.WrapError(err, "NoncurrentDays")
+					return
+				}
+				z.NoncurrentDays = nil
+			} else {
+				if z.NoncurrentDays == nil {
+					z.NoncurrentDays = new(int)
+				}
+				*z.NoncurrentDays, err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "NoncurrentDays")
+					return
+				}
+			}
+		default:
+			err = dc.Skip()
+			if err != nil {
+				err = msgp.WrapError(err)
+				return
+			}
+		}
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z *IcebergUnreferencedFileRemovalSettings) EncodeMsg(en *msgp.Writer) (err error) {
+	// map header, size 2
+	// write "UnreferencedDays"
+	err = en.Append(0x82, 0xb0, 0x55, 0x6e, 0x72, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x64, 0x44, 0x61, 0x79, 0x73)
+	if err != nil {
+		return
+	}
+	if z.UnreferencedDays == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.UnreferencedDays)
+		if err != nil {
+			err = msgp.WrapError(err, "UnreferencedDays")
+			return
+		}
+	}
+	// write "NoncurrentDays"
+	err = en.Append(0xae, 0x4e, 0x6f, 0x6e, 0x63, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x74, 0x44, 0x61, 0x79, 0x73)
+	if err != nil {
+		return
+	}
+	if z.NoncurrentDays == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.NoncurrentDays)
+		if err != nil {
+			err = msgp.WrapError(err, "NoncurrentDays")
+			return
+		}
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z *IcebergUnreferencedFileRemovalSettings) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	// map header, size 2
+	// string "UnreferencedDays"
+	o = append(o, 0x82, 0xb0, 0x55, 0x6e, 0x72, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x64, 0x44, 0x61, 0x79, 0x73)
+	if z.UnreferencedDays == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.UnreferencedDays)
+	}
+	// string "NoncurrentDays"
+	o = append(o, 0xae, 0x4e, 0x6f, 0x6e, 0x63, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x74, 0x44, 0x61, 0x79, 0x73)
+	if z.NoncurrentDays == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.NoncurrentDays)
+	}
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *IcebergUnreferencedFileRemovalSettings) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var field []byte
+	_ = field
+	var zb0001 uint32
+	zb0001, bts, err = msgp.ReadMapHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	for zb0001 > 0 {
+		zb0001--
+		field, bts, err = msgp.ReadMapKeyZC(bts)
+		if err != nil {
+			err = msgp.WrapError(err)
+			return
+		}
+		switch msgp.UnsafeString(field) {
+		case "UnreferencedDays":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.UnreferencedDays = nil
+			} else {
+				if z.UnreferencedDays == nil {
+					z.UnreferencedDays = new(int)
+				}
+				*z.UnreferencedDays, bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "UnreferencedDays")
+					return
+				}
+			}
+		case "NoncurrentDays":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.NoncurrentDays = nil
+			} else {
+				if z.NoncurrentDays == nil {
+					z.NoncurrentDays = new(int)
+				}
+				*z.NoncurrentDays, bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "NoncurrentDays")
+					return
+				}
+			}
+		default:
+			bts, err = msgp.Skip(bts)
+			if err != nil {
+				err = msgp.WrapError(err)
+				return
+			}
+		}
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z *IcebergUnreferencedFileRemovalSettings) Msgsize() (s int) {
+	s = 1 + 17
+	if z.UnreferencedDays == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += 15
+	if z.NoncurrentDays == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
 func (z *MaintenanceJobStatus) DecodeMsg(dc *msgp.Reader) (err error) {
 	{
 		var zb0001 string
@@ -1995,6 +2202,24 @@ func (z *TableMaintenanceSettings) DecodeMsg(dc *msgp.Reader) (err error) {
 					}
 				}
 			}
+		case "IcebergUnreferencedFileRemoval":
+			if dc.IsNil() {
+				err = dc.ReadNil()
+				if err != nil {
+					err = msgp.WrapError(err, "IcebergUnreferencedFileRemoval")
+					return
+				}
+				z.IcebergUnreferencedFileRemoval = nil
+			} else {
+				if z.IcebergUnreferencedFileRemoval == nil {
+					z.IcebergUnreferencedFileRemoval = new(IcebergUnreferencedFileRemovalSettings)
+				}
+				err = z.IcebergUnreferencedFileRemoval.DecodeMsg(dc)
+				if err != nil {
+					err = msgp.WrapError(err, "IcebergUnreferencedFileRemoval")
+					return
+				}
+			}
 		default:
 			err = dc.Skip()
 			if err != nil {
@@ -2008,9 +2233,9 @@ func (z *TableMaintenanceSettings) DecodeMsg(dc *msgp.Reader) (err error) {
 
 // EncodeMsg implements msgp.Encodable
 func (z *TableMaintenanceSettings) EncodeMsg(en *msgp.Writer) (err error) {
-	// map header, size 2
+	// map header, size 3
 	// write "IcebergSnapshotManagement"
-	err = en.Append(0x82, 0xb9, 0x49, 0x63, 0x65, 0x62, 0x65, 0x72, 0x67, 0x53, 0x6e, 0x61, 0x70, 0x73, 0x68, 0x6f, 0x74, 0x4d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x6d, 0x65, 0x6e, 0x74)
+	err = en.Append(0x83, 0xb9, 0x49, 0x63, 0x65, 0x62, 0x65, 0x72, 0x67, 0x53, 0x6e, 0x61, 0x70, 0x73, 0x68, 0x6f, 0x74, 0x4d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x6d, 0x65, 0x6e, 0x74)
 	if err != nil {
 		return
 	}
@@ -2056,15 +2281,32 @@ func (z *TableMaintenanceSettings) EncodeMsg(en *msgp.Writer) (err error) {
 			}
 		}
 	}
+	// write "IcebergUnreferencedFileRemoval"
+	err = en.Append(0xbe, 0x49, 0x63, 0x65, 0x62, 0x65, 0x72, 0x67, 0x55, 0x6e, 0x72, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x64, 0x46, 0x69, 0x6c, 0x65, 0x52, 0x65, 0x6d, 0x6f, 0x76, 0x61, 0x6c)
+	if err != nil {
+		return
+	}
+	if z.IcebergUnreferencedFileRemoval == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = z.IcebergUnreferencedFileRemoval.EncodeMsg(en)
+		if err != nil {
+			err = msgp.WrapError(err, "IcebergUnreferencedFileRemoval")
+			return
+		}
+	}
 	return
 }
 
 // MarshalMsg implements msgp.Marshaler
 func (z *TableMaintenanceSettings) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// map header, size 2
+	// map header, size 3
 	// string "IcebergSnapshotManagement"
-	o = append(o, 0x82, 0xb9, 0x49, 0x63, 0x65, 0x62, 0x65, 0x72, 0x67, 0x53, 0x6e, 0x61, 0x70, 0x73, 0x68, 0x6f, 0x74, 0x4d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x6d, 0x65, 0x6e, 0x74)
+	o = append(o, 0x83, 0xb9, 0x49, 0x63, 0x65, 0x62, 0x65, 0x72, 0x67, 0x53, 0x6e, 0x61, 0x70, 0x73, 0x68, 0x6f, 0x74, 0x4d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x6d, 0x65, 0x6e, 0x74)
 	if z.IcebergSnapshotManagement == nil {
 		o = msgp.AppendNil(o)
 	} else {
@@ -2086,6 +2328,17 @@ func (z *TableMaintenanceSettings) MarshalMsg(b []byte) (o []byte, err error) {
 			o = msgp.AppendNil(o)
 		} else {
 			o = msgp.AppendInt(o, *z.IcebergCompaction.TargetFileSizeMB)
+		}
+	}
+	// string "IcebergUnreferencedFileRemoval"
+	o = append(o, 0xbe, 0x49, 0x63, 0x65, 0x62, 0x65, 0x72, 0x67, 0x55, 0x6e, 0x72, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x64, 0x46, 0x69, 0x6c, 0x65, 0x52, 0x65, 0x6d, 0x6f, 0x76, 0x61, 0x6c)
+	if z.IcebergUnreferencedFileRemoval == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o, err = z.IcebergUnreferencedFileRemoval.MarshalMsg(o)
+		if err != nil {
+			err = msgp.WrapError(err, "IcebergUnreferencedFileRemoval")
+			return
 		}
 	}
 	return
@@ -2177,6 +2430,23 @@ func (z *TableMaintenanceSettings) UnmarshalMsg(bts []byte) (o []byte, err error
 					}
 				}
 			}
+		case "IcebergUnreferencedFileRemoval":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.IcebergUnreferencedFileRemoval = nil
+			} else {
+				if z.IcebergUnreferencedFileRemoval == nil {
+					z.IcebergUnreferencedFileRemoval = new(IcebergUnreferencedFileRemovalSettings)
+				}
+				bts, err = z.IcebergUnreferencedFileRemoval.UnmarshalMsg(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "IcebergUnreferencedFileRemoval")
+					return
+				}
+			}
 		default:
 			bts, err = msgp.Skip(bts)
 			if err != nil {
@@ -2207,6 +2477,12 @@ func (z *TableMaintenanceSettings) Msgsize() (s int) {
 		} else {
 			s += msgp.IntSize
 		}
+	}
+	s += 31
+	if z.IcebergUnreferencedFileRemoval == nil {
+		s += msgp.NilSize
+	} else {
+		s += z.IcebergUnreferencedFileRemoval.Msgsize()
 	}
 	return
 }
